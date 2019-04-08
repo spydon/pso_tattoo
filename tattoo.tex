@@ -1,0 +1,79 @@
+\documentclass[28pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+%\usepackage{amsfonts}
+%\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{esvect}
+\usepackage{unicode-math}
+%%\setmainfont{Courier New}
+%%\setmathfont{latinmodern-math.otf}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=10mm,
+ right=10mm,
+ }
+
+\title{Particle Swarm Optimization as a description of society}
+\author{Lukas Klingsbo}
+\date{April 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\texttt{test}\\
+test\\
+
+{\Huge
+}%
+{\Huge
+\begin{align*}
+x_i(0) &\in \mathbb{R}^n\\
+v_i(0) &= \vec{0}\\
+v_i(t+1) &=
+\begin{cases}
+  \begin{aligned}
+                      &c_cr_1[p_{best}-x_i(t)] +\\
+    \omega v_{i}(t) + &c_sr_2[g_{best}-x_i(t)] +\\
+                      &c_rr_3[\Phi-x_i(t)] \\
+  \end{aligned}
+\end{cases}\\
+x_i(t+1) &= x_i(t)+v_i(t+1)\\
+\end{align*}
+}%
+
+%{\Huge
+%$x_0 \in \mathbb{R}^n, v_0 = \vec{0}, j=i-1$
+%}%
+%{\Huge
+%\begin{align*}
+%x_0 + \sum\limits_{i=1}^n 
+%\begin{cases}
+%                &c_cr_1[p_{best}-x_{j}] +\\
+%  \omega v_{j} +&c_sr_2[g_{best}-x_{j}] +\\
+%                &c_rr_3[\Phi-x_{j}]
+%\end{cases}
+%\end{align*}
+%}%
+
+%% OOOLD
+%{\Huge
+%\begin{align*}
+%x_0 \in  , v_0 = \vec{0}\\
+%v_{i+1} = \omega v_i + & c_cr_1[p_{best}-x_i] +\\
+%                       & c_sr_2[g_{best}-x_i] +\\
+%                       & c_rr_3[\Phi-x_i]
+%\end{align*}
+%}%
+
+\end{document}
+

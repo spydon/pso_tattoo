@@ -4,18 +4,25 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Courier New}
+\usepackage[bold]{mathastext}
+
 %\usepackage{amsfonts}
 %\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
-\usepackage{fontspec}
+%\usepackage[T1]{fontenc}
+%\usepackage{fontspec}
 \usepackage{esvect}
-\usepackage{unicode-math}
+%\usepackage{unicode-math}
 %%\setmainfont{Courier New}
 %%\setmathfont{latinmodern-math.otf}
 
+\hyphenpenalty=10000
+\hbadness=10000
 \usepackage{geometry}
 
-\title{Particle Swarm Optimization as a description of society}
+\title{Particle Swarm Optimization as a description of individuals in society}
 \author{Lukas Klingsbo}
 \date{April 2019}
 
@@ -23,41 +30,67 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Velocity and positional update algorithm}
 
-\begin{enumerate}
-  \item i = individual number
-  \item $x_i(0)$ = Random starting position of individual i in the multidimensional space
-    % TODO: Describe more about prerequisites
-  \item $v_i(0)$ = Every indiviual has no starting velocity
-  \item $v_i(t+1)$ = The next velocity from time t
-  \item $x_i(t+1)$ = The next position from time t
-    Simply the current position with the velocity for time t+1 added
-\end{enumerate}
-
-Thoughts, should random part have random weight too?
-Explains how an individual will be randomly much affected by events
-And $C_r$ might explain how much its priviledge or lack of it will make the 
-random events to have different impact on you.
-
-{\Huge
+{\huge
 \begin{align*}
 x_i(0) &\in \mathbb{R}^n\\
 v_i(0) &= \vec{0}\\
 v_i(t+1) &=
 \begin{cases}
   \begin{aligned}
-                      &c_{c}r_1[p_{best}-x_i(t)] +\\
-    \omega v_{i}(t) + &c_{s}r_2[g_{best}-x_i(t)] +\\
-                      &c_{r}r_3[i_{rand}-x_i(t)] \\
+                    &\omega_{c}r_c[p_{best}-x_i(t)] +\\
+    m_{i}v_{i}(t) + &\omega_{s}r_s[g_{best}-x_i(t)] +\\
+                    &\omega_{r}r_r[p_{rand}-x_i(t)] \\
   \end{aligned}
 \end{cases}\\
 x_i(t+1) &= x_i(t)+v_i(t+1)\\
 \end{align*}
 }%
 
-%% Section of how to build a good society where the different constants need to differ
-%% Unless we have found the solution to the best fitness
+\newpage
+\section{Explanation}
+
+\subsection{Parts of the algorithm}
+\begin{enumerate}
+  \item i = individual number
+  \item $x_i(0) \in \mathbb{R}^n$ = Random starting position of individual i in the multidimensional space
+  \item $v_i(0) = \vec{0}$ = Every indiviual has no starting velocity
+  \item $v_i(t+1)$ = The next velocity from time t
+  \item $x_i(t+1)$ = The next position from time t
+    Simply the current position with the velocity for time t+1 added
+  \item $m_i$ = Individual inertia, how much the previous velocity should matter
+  \item $\omega_{csr}$ = Weight of how much the cognition/social/random vector should affect the outcome
+  \item $r_{csr}$ = Random weights for how much the cognition/social/random vector should affect the outcome
+    The random function is not evenly distributed for the different individuals and this is how genes and other potential static things are represented
+  \item $p_{best}$ = Personal best, the best position that the particle has found itself in so far
+  \item $g_{best}$ = Global best, the best position that the swarm, or the particles neighbours, have found themselves in so far
+  \item $p_{rand}$ = Personal random, a random vector which ensures exploration
+  \item $x_i(t)$ = The individuals current position
+\end{enumerate}
+
+\subsection{Relation to individuals and society}
+Each individual start in a random position in life ($x_i(0) \in \mathbb{R}^n$), with different distances to different opportunities. 
+In the beginning individuals don't have a velocity ($v_i(0) = \vec{0}$), but that will change as soon as time starts passing ($v_i(t) = \ldots$).
+
+Every individual will be differently much affected by different things happening around them, 
+this is what is described by $\omega_{csr}$ which are the weights for the cognition, social and random vectors. 
+
+The cognition part is describing what we have experienced ourselves and the social part is how we are connected to the world around us, 
+for example how much help you get from society and other individuals. 
+The random vector is for random unforseen events that happen to the individual, and just like in reality this will have different
+proportions on different individuals. For example if someones home burns down it might have such a negative impact that they will never be
+able to fully recover, meanwhile it will barely have any impact at all on some, think a billionaire or someone with a lot of connections compared
+to a working class person in a country with little social wellfare.
+
+For every new time step the next position will always be affected by the last position and what also what direction you are currently heading. 
+Some people will have a higher chance of keep on heading in the same direction as they currently do, this is described by the inertia ($m_i$).
+The inertia can also change with time.
+
+Some static parameters like genes are not clearly described here, since every position in the N-dimensional space is dynamic. 
+But those parameters are described in the pseudo-random algorithm for generating $r_{csr}$, which will not have evenly distributed outcomes.
+
+There is a lot more to describe, but that is the gist of it.
 
 \end{document}
 
